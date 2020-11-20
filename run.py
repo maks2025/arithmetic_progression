@@ -99,7 +99,7 @@ async def handle_progress(request) -> web.Response:
 
 app = web.Application()
 app.router.add_route('GET', '/create_task', handle_create_task)
-app.router.add_route('GET', '/progress', handle_progress)
+app.router.add_route('GET', '/states', handle_progress)
 
 
 async def main(workers: int) -> None:
