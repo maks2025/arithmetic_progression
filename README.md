@@ -4,7 +4,7 @@
 
 Server port 8000  
 
-## End progress
+## End points
 ```
 /create_task - создает задачу
 Example:
