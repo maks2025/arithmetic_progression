@@ -6,13 +6,14 @@ from operator import itemgetter
 from typing import Tuple, Optional, Union
 
 from aiohttp import web
+from itertools import count
 from pydantic import BaseModel, ValidationError
 
 queue = asyncio.Queue()
 
 db = {}
 
-ids = []
+ids = count(1)
 
 STATUS_IN_QUEUE = 'In queue'
 STATUS_IN_PROCESS = 'In process'
@@ -35,12 +36,13 @@ async def create_queue() -> asyncio.Queue:
 
 
 async def get_id() -> int:
-    try:
-        id_ = ids[-1] + 1
-    except IndexError:
-        id_ = 1
-    ids.append(id_)
-    return id_
+    # try:
+    #     id_ = ids[-1] + 1
+    # except IndexError:
+    #     id_ = 1
+    # ids.append(id_)
+    # return id_
+    return next(ids)
 
 
 def serialize(data: dict) -> Tuple[Optional[Task], Optional[str]]:
