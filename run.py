@@ -36,12 +36,6 @@ async def create_queue() -> asyncio.Queue:
 
 
 async def get_id() -> int:
-    # try:
-    #     id_ = ids[-1] + 1
-    # except IndexError:
-    #     id_ = 1
-    # ids.append(id_)
-    # return id_
     return next(ids)
 
 
