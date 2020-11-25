@@ -64,7 +64,8 @@ async def handle_create_task(request) -> web.Response:
     db[task.id] = task
     await queue.put(task)
 
-    return web.Response(text=task.json(), status=200)
+    return web.Response(status=201, body=task.json(),
+                        content_type='application/json')
 
 
 async def logic(task: Task) -> None:
@@ -90,7 +91,8 @@ async def worker() -> None:
 
 async def handle_progress(request) -> web.Response:
     states = [state.dict()for state in db.values()]
-    return web.Response(text=json.dumps(sorted(states, key=itemgetter('id'))), status=200)
+    return web.Response(status=201, body=json.dumps(sorted(states, key=itemgetter('id'))),
+                        content_type='application/json')
 
 
 app = web.Application()
